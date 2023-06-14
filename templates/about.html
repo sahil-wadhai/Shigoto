@@ -1,0 +1,53 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block title%}
+    {{title}}
+{%endblock title%}
+
+{% block head %}
+    <link rel="stylesheet" href="{%static '/home/css/about.css'%}"/>
+{% endblock head %}
+
+{%block style%}
+{%endblock style%}
+
+{%block body%}
+    <div class="row">
+        <div class="col-md-6" id="logo-space">
+            <img width="250px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGT3RFSJ8nqiCqGdk7Lk6IHk8kNwKBBalSHA&usqp=CAU"  alt="">
+            <p id="logo-name">仕事</p>
+        </div>
+        <div class="col-md-6" id="form">
+            <h1>Feedback Form</h1>
+
+            <form method="POST" action="/contact">
+            {% csrf_token %}
+                <div class="row mt-3 mb-4">
+                    <div class="col">
+                        <label for="first-name" class="form-label">First Name</label>
+                        <input type="text" class="form-control" name="first-name" id="first-name" placeholder="First name" aria-label="First name">
+                    </div>
+                    <div class="col">
+                        <label for="last-name" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" name="last-name" id="last-name" placeholder="Last name" aria-label="Last name">
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com" required>   
+                </div>
+
+                <div class="mb-4">
+                    <label for="feedback-text" class="form-label">Feedback text</label>
+                    <textarea class="form-control" name="feedback-text" id="feedback-text" placeholder="write your queries here" rows="3" required></textarea>
+                </div>
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{%endblock body%}

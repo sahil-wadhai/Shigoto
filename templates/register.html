@@ -1,0 +1,70 @@
+{%extends 'base0.html'%}
+{%load static%}
+
+{%block style%}
+    <link rel="stylesheet" href={%static 'home/css/register.css'%}/> 
+{%endblock style%}
+
+{%block body%}
+    <div class="row px-4">
+        <div class="col-md-6" id="form">
+            <h1>Registration Form</h1>
+
+            <form method="POST" action="/register">
+            {% csrf_token %}
+                <div class="row mt-3 mb-4">
+                    <div class="col">
+                        <label for="first-name" class="form-label">First Name</label>
+                        <input type="text" class="form-control" name="first-name" id="first-name" placeholder="First name" aria-label="First name">
+                    </div>
+                    <div class="col">
+                        <label for="last-name" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" name="last-name" id="last-name" placeholder="Last name" aria-label="Last name">
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com">     
+                </div>
+
+                <div class="mb-4 row">
+                    <div class="col">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" name="username" id="username" class="form-control" placeholder="Unique name" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="col">
+                        <label for="occupation" class="form-label">Occupation</label>
+                        <input type="text" name="occupation" class="form-control" id="occupation" placeholder="ex-Student">  
+                    </div> 
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <label for="password" class="form-label">Set Password</label>
+                        <input type="password" name="password" class="form-control" id="password" placeholder="minimum 6 characters">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="check_password" class="form-label">Confirm Password</label>
+                        <input type="password" name="password" class="form-control" id="password" placeholder="re-type password">
+                    </div>    
+                </div>
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+            <br>
+            <p><a href="/login">Back</a></p>
+        </div>
+
+        <div class="col-md-6" id="logo-space">
+            <p id="logo-name">仕事</p>
+            <p><strong>Shigoto</strong> A todo List Web-Application</p>
+            <div id="benefits">
+                <img class="img" width="90%" src="https://www.toodledo.com/img/internal/blog/why-use-a-to-do-list-infographic.png" alt="">
+            </div>
+        </div>
+    </div>
+{%endblock body%}
+

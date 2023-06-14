@@ -1,0 +1,41 @@
+{%extends 'base0.html'%}
+{%load static%}
+{%block title%}
+    {{title}}
+{%endblock title%}
+
+{%block style%}
+    <link rel="stylesheet" href={%static 'home/css/login.css'%}/> 
+{%endblock style%}
+
+{%block body%}
+    <div class="row">
+
+        <div class="col-md-6" id="logo-space">
+            <img width="250px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGT3RFSJ8nqiCqGdk7Lk6IHk8kNwKBBalSHA&usqp=CAU"  alt="">
+            <p id="logo-name">仕事</p>
+        </div>
+
+        <div class="col-md-6" id="form">
+
+            <h1>LogIn</h1> 
+            <form method="POST" action="/login">
+            {% csrf_token %}
+                <div class="mb-4">
+                    <label for="text" class="form-label">Username</label>
+                    <input type="text" name="username" class="form-control" id="username" placeholder="Enter username" required>   
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" id="password" placeholder="Enter Password" required>   
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>          
+            </form>
+            <br>
+            <a href="/register">Register</a>
+            
+        </div>
+    </div>
+{%endblock body%}

@@ -1,0 +1,27 @@
+#form h1
+{
+    font-size: 2em;
+    color:grey;
+    margin-top:25px;
+    margin-bottom:15px;
+}
+
+#form form
+{
+    color:lightslategray;
+}
+#form
+{
+    max-width: 500px;
+    padding:50px
+}
+#logo-name
+{
+    font-size: 100px;
+    font-weight: 800;
+    letter-spacing: 5px;
+}
+#logo-space
+{
+    text-align: center;
+}

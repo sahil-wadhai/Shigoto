@@ -1,0 +1,102 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block title%}
+{{title}}
+{%endblock title%}
+
+{%block head%}
+<link rel="stylesheet" href="{%static 'home/css/profile.css'%}" />
+{%endblock head%}
+
+{%block body%}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<section class="vh-100" style="background-color: #f4f5f7;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-6 mb-4 mb-lg-0">
+        <div class="card mb-3" style="border-radius: .5rem;">
+          <div class="row g-0">
+            <div class="col-md-4 gradient-custom text-center text-white"
+              style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+              <img src="{%static 'home/img/profile_img.webp'%}" alt="Avatar" class="img-fluid my-5"
+                style="width: 80px;" />
+              <h5>{{profile.name}}</h5>
+              <p>{{user.occupation}}</p>
+              <i class="far fa-edit mb-5"></i>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body p-4">
+                <h6>Information</h6>
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                  <div class="col-6 mb-3">
+                    <h6>Username</h6>
+                    <p class="text-muted">{{user.user_name}}</p>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <h6>Email</h6>
+                    <p class="text-muted">{{user.email}}</p>
+                  </div>
+                </div>
+                <h6>Task</h6>
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                  <div class="col-4 mb-3">
+                    <h6>Completed</h6>
+                    <p class="text-muted">{{profile.tasks_completed}}</p>
+                  </div>
+                  <div class="col-4 mb-3">
+                    <h6>Pending</h6>
+                    <p class="text-muted">{{profile.tasks_pending}}</p>
+                  </div>
+                  <div class="col-4 mb-3">
+                    <h6>Overdue</h6>
+                    <p class="text-muted">{{profile.tasks_overdue}}</p>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-start">
+                  <a href={{user.facebook}}><i class="fab fa-facebook-f fa-lg me-3"></i></a>
+                  <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
+                  <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col col-lg-6 mb-4 mb-lg-0">
+        <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  var xValues = ["Completed", "Pending","Overdue"];
+  var yValues = [{{profile.tasks_completed}},{{profile.tasks_pending}},{{profile.tasks_overdue}}];
+  var barColors = [
+    "#22A699",
+    "#F2BE22",
+    "#F24C3D"
+  ];
+
+  new Chart("myChart", {
+    type: "pie",
+    data: {
+      labels: xValues,
+      datasets: [{
+        backgroundColor: barColors,
+        data: yValues
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: "Summary Analytics"
+      }
+    }
+  });
+</script>
+
+{%endblock body%}

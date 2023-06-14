@@ -1,0 +1,66 @@
+{%load static%}
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> {%block title%} {%endblock title%} </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    {%block head%}
+    {%endblock head%}
+
+    <style>
+      {%block style%} {% endblock style %}
+      .head
+      {
+        text-align:center;
+      }
+      .navbar-brand{
+        font-size:2em;
+        vertical-align: sub;
+      }
+    </style>
+
+  </head>
+  <body>
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+      <div class="container-fluid">     
+
+          <span class="mx-auto head">
+            <img class="logo" width='55px' src="{%static 'home/img/tick.png'%}"/>
+            <a class="navbar-brand mt-2" href="/">     
+              Shigoto
+            </a>
+          </span>
+
+
+        <ul class="navbar-nav me-4 mb-2 mb-lg-0">
+          <li class="nav-item ms-2 dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Settings
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/profile">Profile</a></li>
+              <li><a class="dropdown-item" href="/about">About</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/logout">Log out</a></li>
+            </ul>
+          </li>            
+        </ul>
+
+      </div>
+    </nav>
+
+    {%block body%}
+
+    {%endblock body%}
+
+    {%block script%}
+
+    {%endblock script%}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,69 @@
+body
+{
+    font-family: 'Ubuntu', sans-serif;
+}
+
+hr
+{
+    display: block;
+    color: white;
+    width: 100%;
+    border: 1px solid white;
+}
+
+#body{
+    font-family: 'Ubuntu', sans-serif;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    height: 500px;
+    border: 0px solid #47B5FF;
+    border-radius: 8px;
+    padding: 15px;
+    overflow-y: scroll;
+}
+
+#body::-webkit-scrollbar {
+    width: 0 !important;
+}
+
+#addNew {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-image: linear-gradient(to right, #47B5FF, #48b1bf);
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.fa-plus {
+    background-color:#FFC23C ;
+    padding: 3px;
+    border-radius: 3px;
+}
+#form
+{
+    margin-top: 1%;
+}
+
+#tasks .task{
+    border: 3px solid #47B5FF;
+    border-radius: 6px;
+    padding: 15px;
+    display: inline-block;
+    line-height:5px;
+}
+
+.True{ background-color:lightgreen; }
+.False{ background-color:lightcoral; }
+
+@media (max-width: 425px)
+{
+    #tasks .task{
+        width: 100%;
+    }
+
+}

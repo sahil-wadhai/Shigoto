@@ -1,0 +1,124 @@
+{%extends 'base.html'%}
+
+{%block title%}
+    {{title}}
+{%endblock title%}
+
+{%block head%}
+    {%load static%}
+    <link rel="stylesheet" href="{% static '/home/css/index.css' %}"/> 
+{%endblock head%}
+
+
+{%block body%}
+<div class="container" id="body">
+
+    <h4 class="mb-3"></h4>
+    <div id="addNew" data-bs-toggle="modal" data-bs-target="#form">
+      <span>Add New Task</span>
+      <i class="fas fa-plus"></i>
+    </div>
+
+    <!-- Modal -->
+    <form method="POST" action="/add-todo" class="modal fade" id="form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {% csrf_token %}
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add New Task</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Task Title</p>
+            <input type="text" class="form-control" name="title" id="textInput" required>
+            <br>
+            <p>Due Date</p>
+            <input type="date" class="form-control" name="due-date" id="dateInput">
+            <br>
+            <p>Priority</p>
+            <div class="container">
+                <select id="priority" name="priority" class="form-select" aria-label="Priority of the task">
+                    <option value="0" selected>None</option>
+                    <option value="3">High</option>
+                    <option value="2">Medium</option>
+                    <option value="1">Low</option>
+                </select>
+            </div>
+            <br>
+            <p>Description</p>
+            <textarea name="desc" class="form-control" id="textarea" cols="30" rows="3"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Add</button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <h5 class="text-center my-3">Tasks</h5>
+
+    <div class="rows" id="tasks">
+        {% for x in tasks %}
+            <div class="task {{x.status}} col-md-3">
+                <p>
+                  {% if x.status%}  
+                  <span class="badge rounded-pill text-bg-light">Completed</span>
+                  {% else %}
+                  <span class="badge rounded-pill text-bg-warning">Pending</span>
+                  {% endif %}
+                </p>
+                <p class="fw-bold">{{x.title}}</p>
+                <p class="small ">{{x.due_date}}</p>
+
+                <span class="options">
+                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#task-{{x.id}}">View</button>
+                    {% if x.status %}  
+                      <a href="reset-todo/{{x.id}}" class="btn btn-dark btn-sm">Reset</a>
+                    {% else %}
+                      <a href="done-todo/{{x.id}}" class="btn btn-success btn-sm">Done</a>
+                    {% endif %}
+
+                    <a href="delete-todo/{{x.id}}" class="btn btn-danger btn-sm">Delete</a>
+                </span>
+                <form class="modal fade" id="task-{{x.id}}" method="POST" action="edit-todo/{{x.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                {% csrf_token %}                  
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">{{x.title}}</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body text-center">
+                        <p>Task Title</p>
+                        <input type="text" class="form-control mb-3" name="title" value="{{x.title}}" required>
+                        <br>
+                        <p>Due Date</p>
+                        <input type="date" class="form-control mb-3" name="due-date" value="{{x.due_date}}">
+                        <br>
+                        <p>Priority</p>
+                        <div class="container mb-3">
+                            <select id="priority" name="priority" class="form-select" aria-label="Priority of the task">
+                                <option value="{{x.priority}}" selected>{{x.priority}}</option>
+                                <option value="3">High</option>
+                                <option value="2">Medium</option>
+                                <option value="1">Low</option>
+                            </select>
+                        </div>
+                        <br>
+                        <p>Description</p>
+                        <textarea name="desc" class="form-control mb-2" id="textarea" cols="30" rows="3">{{x.desc}}</textarea>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</a>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+  </div>
+
+{%endblock body%}
